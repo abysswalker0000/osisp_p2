@@ -1,15 +1,13 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
-OBJS = main.o config.o
+CC = g++
+CFLAGS = -Wall -O2 -std=c++11
+PROGRAM = self_recovering_process
 
-daemon_logger: $(OBJS)
-	$(CC) $(CFLAGS) -o daemon_logger $(OBJS)
+default: $(PROGRAM)
 
-main.o: main.c config.h
-	$(CC) $(CFLAGS) -c main.c
+$(PROGRAM): lab4.cpp
+	$(CC) $(CFLAGS) -o $(PROGRAM) lab4.cpp
 
-config.o: config.c config.h
-	$(CC) $(CFLAGS) -c config.c
+clear:
+	rm -f $(PROGRAM) counter.txt
 
-clean:
-	rm -f $(OBJS) daemon_logger
+.PHONY: default clear
